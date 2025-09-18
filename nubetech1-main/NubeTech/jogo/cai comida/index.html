@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>cai comida</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="game">
+      <div id="player"></div>
+    </div>
+    <div id="scoreboard"><!--pontuação score-->
+      <span id="score">Pontos: 0</span>
+      <span id="lives">Vidas: 3</span>
+    </div>
+
+    <div class="button-container">
+      <a href="../../site/jogos.html">
+        <button class="voltar">VOLTAR PARA A NUBEGAMES</button><!--botão voltar para tela inicial-->
+      </a>
+    </div>
+  </div>
+
+  <!-- Tela de Game Over -->
+  <div id="game-over" class="hidden">
+    <div id="game-over-content">
+      <h1>Fim de Jogo!</h1>
+      <p id="final-score">Sua pontuação: 0</p>
+      <button id="restart-button">Jogar Novamente</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

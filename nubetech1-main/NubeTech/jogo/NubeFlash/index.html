@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NubeFlash - Forca com Cores</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0e1a, #1a1a2e, #16213e);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #e6e6e6;
+        }
+        
+        .container {
+            background-color: rgba(18, 18, 29, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #64ffda;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.4);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        #scoreboard {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            background-color: rgba(22, 27, 54, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        #scoreboard p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #8892b0;
+        }
+        
+        #score, #phase {
+            color: #64ffda;
+            font-weight: 600;
+        }
+        
+        #word-display-container {
+            margin: 25px 0;
+            min-height: 60px;
+            background-color: rgba(22, 27, 54, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        #word-display {
+            font-size: 2.5rem;
+            letter-spacing: 10px;
+            font-weight: 600;
+            color: #ccd6f6;
+        }
+        
+        #game-board {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .color {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            opacity: 0.9;
+            transition: all 0.2s;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .color:hover {
+            opacity: 1;
+            transform: scale(1.03);
+        }
+        
+        .color::before {
+            content: attr(data-letter);
+            position: absolute;
+            font-size: 36px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7);
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .color:hover::before {
+            opacity: 0.9;
+        }
+        
+        #green { 
+            background: linear-gradient(to bottom, #0a5c36, #083c24);
+        }
+        
+        #red { 
+            background: linear-gradient(to bottom, #9a2c2c, #6d1f1f);
+        }
+        
+        #yellow { 
+            background: linear-gradient(to bottom, #9c8a1c, #6d6013);
+        }
+        
+        #blue { 
+            background: linear-gradient(to bottom, #1e4b7a, #153354);
+        }
+        
+        .flash {
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        #start {
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: linear-gradient(to right, #0a5c36, #0d7a46);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        #start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #0d7a46, #0f8e51);
+        }
+        
+        #start:disabled {
+            background: linear-gradient(to right, #2d3748, #4a5568);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            color: #a0aec0;
+        }
+        
+        #modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        #modal.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #modal-content {
+            background: linear-gradient(to bottom, #1a202c, #2d3748);
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            max-width: 90%;
+            width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        #modal-message {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+        
+        #modal-button {
+            padding: 12px 30px;
+            background: linear-gradient(to right, #0a5c36, #0d7a46);
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        #modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #0d7a46, #0f8e51);
+        }
+        
+        .voltar {
+            margin-top: 40px;
+  border: none;
+  border-radius: 1000px;
+  font-size: 20px;
+  padding: 12px 24px;
+  cursor: pointer;
+  color: #0c0c0c;
+  background-color: rgb(10, 186, 181);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgb(4, 134, 130);
+  font-family: "Segoe UI", sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+        }
+        
+        .voltar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(to right, #4a5568, #2d3748);
+        }
+        
+        .instruction {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #a0aec0;
+            max-width: 500px;
+            line-height: 1.5;
+            background-color: rgba(22, 27, 54, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .letter-found {
+            color: #64ffda;
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.4);
+        }
+        
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NubeFlash - Forca com Cores</h1>
+        
+        <!-- Placar com pontuação e fase atual -->
+        <div id="scoreboard">
+            <p>Pontuação: <span id="score">0</span></p>
+            <p>Fase: <span id="phase">1</span>/6</p>
+        </div>
+
+        <!-- Exibição da palavra com letras faltando -->
+        <div id="word-display-container">
+            <p id="word-display">_ _ _ _</p>
+        </div>
+
+        <!-- Tabuleiro do jogo com 4 cores -->
+        <div id="game-board">
+            <div class="color" id="green" data-letter="C"></div>
+            <div class="color" id="red" data-letter="S"></div>
+            <div class="color" id="yellow" data-letter="A"></div>
+            <div class="color" id="blue" data-letter="O"></div>
+        </div>
+
+        <!-- Botão para iniciar o jogo -->
+        <button id="start">Iniciar Jogo</button>
+        
+        <p class="instruction">Clique nas cores para revelar as letras da palavra secreta. Complete todas as palavras para vencer!</p>
+        
+        <div class="game-info">
+            <p>Desenvolvido por NubeGames</p>
+            <p>v1.0</p>
+        </div>
+
+        <!-- Modal para mostrar as mensagens de fim de jogo ou vitória -->
+        <div id="modal">
+            <div id="modal-content">
+                <p id="modal-message"></p>
+                <button id="modal-button">Jogar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <!--Botão voltar Para NubeGames-->
+    <button class="voltar" onclick="window.location.href='../../site/jogos.html'">VOLTAR PARA A NUBEGAMES</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const colors = ['green', 'red', 'yellow', 'blue'];
+            let score = 0;
+            let phase = 1;
+            const maxRounds = 5;
+            let currentWordIndex = 0;
+            
+            const wordList = [
+                { word: 'CASA', letters: ['C', 'S', 'A', 'A'] },
+                { word: 'BOLA', letters: ['B', 'L', 'A', 'O'] },
+                { word: 'GATO', letters: ['G', 'T', 'A', 'O'] },
+                { word: 'PATO', letters: ['P', 'T', 'A', 'O'] },
+                { word: 'RATO', letters: ['R', 'T', 'A', 'O'] }
+            ];
+            
+            // Elementos do DOM
+            const startButton = document.getElementById('start');
+            const colorButtons = document.querySelectorAll('.color');
+            const scoreDisplay = document.getElementById('score');
+            const phaseDisplay = document.getElementById('phase');
+            const wordDisplay = document.getElementById('word-display');
+            const modal = document.getElementById('modal');
+            const modalMessage = document.getElementById('modal-message');
+            const modalButton = document.getElementById('modal-button');
+            
+            let playerSequence = [];
+            let currentWord = '';
+            
+            // Inicia o jogo
+            startButton.addEventListener('click', startGame);
+            
+            // Evento de clique nas cores
+            colorButtons.forEach(button => {
+                button.addEventListener('click', () => handlePlayerClick(button));
+            });
+            
+            // Fecha o modal ao clicar no botão
+            modalButton.addEventListener('click', () => {
+                modal.classList.remove('visible');
+                startButton.disabled = false;
+            });
+            
+            // Começa o jogo
+            function startGame() {
+                score = 0;
+                phase = 1;
+                currentWordIndex = 0;
+                playerSequence = [];
+                updateScore();
+                loadWord();
+                startButton.disabled = true;
+                startButton.textContent = "Jogo em Andamento";
+            }
+            
+            // Carrega uma nova palavra
+            function loadWord() {
+                if (currentWordIndex >= wordList.length) {
+                    showModal('Parabéns! Você completou todas as fases!');
+                    return;
+                }
+                
+                const wordData = wordList[currentWordIndex];
+                currentWord = wordData.word;
+                
+                // Atualiza as letras nas cores
+                colorButtons.forEach((button, index) => {
+                    button.setAttribute('data-letter', wordData.letters[index]);
+                });
+                
+                playerSequence = [];
+                updateWordDisplay();
+                updateScore();
+            }
+            
+            // Lida com o clique do jogador
+            function handlePlayerClick(button) {
+                if (startButton.disabled) {
+                    const letter = button.getAttribute('data-letter');
+                    
+                    // Adiciona a letra à sequência do jogador se ela estiver correta
+                    if (currentWord.includes(letter) && !playerSequence.includes(letter)) {
+                        playerSequence.push(letter);
+                        flashColor(button.id);
+                        updateWordDisplay();
+                        
+                        // Verifica se a palavra foi completada
+                        if (isWordComplete()) {
+                            score += 100;
+                            phase++;
+                            currentWordIndex++;
+                            updateScore();
+                            
+                            if (currentWordIndex >= wordList.length) {
+                                setTimeout(() => {
+                                    showModal('Parabéns! Você completou todas as fases!');
+                                }, 1000);
+                            } else {
+                                setTimeout(() => {
+                                    loadWord();
+                                }, 1000);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Verifica se a palavra foi completada
+            function isWordComplete() {
+                const uniqueLetters = [...new Set(currentWord.split(''))];
+                return uniqueLetters.every(letter => playerSequence.includes(letter));
+            }
+            
+            // Animação de clique na cor
+            function flashColor(color) {
+                const el = document.getElementById(color);
+                el.classList.add('flash');
+                setTimeout(() => el.classList.remove('flash'), 300);
+            }
+            
+            // Atualiza o display da palavra
+            function updateWordDisplay() {
+                const displayText = currentWord
+                    .split('')
+                    .map(letter => playerSequence.includes(letter) ? 
+                         `<span class="letter-found">${letter}</span>` : '_')
+                    .join(' ');
+                
+                wordDisplay.innerHTML = displayText;
+            }
+            
+            // Atualiza os valores da pontuação e fase na tela
+            function updateScore() {
+                scoreDisplay.textContent = score;
+                phaseDisplay.textContent = phase;
+            }
+            
+            // Exibe o modal com mensagem
+            function showModal(message) {
+                modalMessage.textContent = message;
+                modal.classList.add('visible');
+                startButton.disabled = false;
+                startButton.textContent = "Iniciar Jogo";
+            }
+        });
+    </script>
+</body>
+</html>

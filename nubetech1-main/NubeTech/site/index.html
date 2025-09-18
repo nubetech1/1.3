@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- Meta informações do documento -->
+  <meta charset="UTF-8" /> <!-- Define o conjunto de caracteres utilizado -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsividade para dispositivos móveis -->
+  <link rel="stylesheet" href="style.css" /> <!-- Link para o arquivo de estilos CSS -->
+  <link rel="shortcut icon" href="logo sem fundo.png" type="image/x-icon" /> <!-- Favicon exibido na aba do navegador -->
+  <title>NubeTech</title> <!-- Título exibido na aba do navegador -->
+</head>
+
+<body>
+  <!-- Container para animação de slide-in -->
+  <div class="slide-in">
+  
+    <!-- Barra superior do site (header) -->
+    <header class="top-bar">
+      <div class="logo-nome">
+        <!-- Logo da NubeTech -->
+        <img src="logo sem fundo.png" alt="Logo da NubeTech" width="100" height="100" />
+        <!-- Nome da empresa -->
+        <h1 class="nome">NubeTech</h1>
+      </div>
+      <!-- Menu de navegação -->
+      <nav>
+        <a href="#NubeGames">JOGOS</a>
+        <a href="#sobre-nos">SOBRE NÓS</a>
+        <a href="#contato">CONTATO</a>
+      </nav>
+    </header>
+
+    <!-- Corpo principal da página -->
+    <main>
+      <!-- Seção de boas-vindas -->
+      <section class="secao">
+        <h1 class="titulo">BEM-VINDO A NUBETECH</h1>
+        <p class="Subtitulo">
+          Na NubeTech, acreditamos que a tecnologia deve ser uma ponte para o crescimento, inovação 
+          e conexão entre pessoas e negócios. Nossa missão é oferecer soluções inteligentes, seguras e 
+          personalizadas que impulsionem sua jornada digital com eficiência e confiança.
+        </p>
+        <div class="conteiner">
+          <!-- Vídeo Apresentação --> 
+          <video id="vid" controls autoplay loop muted playsinline>
+            <source src="NubeTech .mp4" type="video/mp4" />
+            Seu navegador não suporta vídeo.
+          </video>
+        </div>
+      </section>
+
+      <!-- Seção sobre a empresa -->
+      <section class="secao" id="sobre-nos">
+        <h2 class="titulo">SOBRE NÓS</h2>
+        <p class="Subtitulo">
+          A NubeTech é uma empresa referência em soluções tecnológicas, comprometida em promover a 
+          inovação e o aprendizado por meio da tecnologia. Surgiu da iniciativa de estudantes 
+          entusiastas da tecnologia e educação, com a missão de revolucionar a forma de aprendizado 
+          utilizando recursos tecnológicos.
+        </p>
+      </section>
+
+      <!-- Seção sobre a equipe -->
+      <section class="secao" id="equipe">
+        <h2 class="titulo">NOSSA EQUIPE</h2>
+        <div class="equipe">
+          <!-- Cards dos membros do grupo -->
+          <article class="card-equipe">
+           <img src="equipe/jao.jpg" alt="João Vitor - Desenvolvedor Full-Stack" />
+            <h3>João Vitor</h3>
+            <p>Desenvolvedor Full-Stack</p>
+          </article>
+
+          <article class="card-equipe">
+           <img src="equipe/Guilherme.jpg" alt="Guilherme - Gestor" />
+            <h3>Guilherme</h3>
+            <p>Gestor</p>
+          </article>
+
+          <article class="card-equipe">
+            <img src="equipe/Athur.jpg" alt="Arthur - Desenvolvedor Front-End" />
+            <h3>Arthur</h3>
+            <p>Desenvolvedor Front-End</p>
+          </article>
+
+          <article class="card-equipe">
+            <img src="equipe/messi.jpg" alt="Messi - Documentador e Designer" />
+            <h3>Enzo</h3>
+            <p>Documentador<br />Designer</p>
+          </article>
+
+          <article class="card-equipe">
+          <img src="equipe/manu (1).jpg" alt="Emanuelle - Gestora e Marketing" />
+            <h3>Emanuelle</h3>
+            <p>Gestora<br/>Marketing</p>
+          </article>
+
+          <article class="card-equipe">
+            <img src="equipe/Bernardo.jpg" alt="Bernardo - Designer" />
+            <h3>Bernardo</h3>
+            <p>Designer</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- NubeGames (plataforma de jogos) -->
+      <section class="secao" id="NubeGames">
+        <h2 class="titulo">NUBEGAMES</h2>
+        <p class="Subtitulo">
+          Nossa plataforma de jogos oferece uma experiência imersiva e acessível para nossos jogadores. 
+          Nossa biblioteca de jogos integra múltiplos dispositivos, possui gráficos de alta qualidade e, 
+          principalmente, proporciona diversão. Com títulos adicionados regularmente, sempre haverá algo novo para jogar.
+        </p>
+
+        <!-- Botão para acessar os jogos -->
+        <div class="conteiner botao-nubegame">
+          <a href="jogos.html"><button class="btn">ACESSAR NUBEGAME</button></a>
+        </div>
+
+        <!-- Padlet para comentários -->
+        <iframe class="coment"
+          src="https://padlet.com/joaovitorgoes09/nubetech-op-rnpl88y5rllaiz0"
+          width="100%" 
+          height="600" 
+          style="border: none;">
+        </iframe>
+      </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="footer" id="contato">
+      <div class="footer-container">
+        <!-- Logo e nome no rodapé -->
+        <div class="footer-logo">
+          <img src="logo sem fundo.png" alt="Logo NubeTech" width="100" />
+          <h2>NubeTech</h2>
+        </div>
+
+        <!-- Links rodapé -->
+        <div class="footer-links">
+          <a href="#NubeGames">Jogos</a>
+          <a href="#sobre-nos">Sobre Nós</a>
+          <a href="#contato">Contato</a>
+        </div>
+
+        <!-- Links para IG -->
+        <div class="footer-social-instagram">
+          <a class="social-link" href="https://www.instagram.com/nubetech_/?next=%2F" aria-label="Instagram">
+            <button class="Btn">
+              <!-- SVG do ícone do Instagram -->
+              <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512" class="svgIcon">
+                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
+              </svg>
+              <span class="text">Instagram</span>
+            </button>
+          </a>
+        </div>
+
+        <!-- Direitos autorais -->
+        <div class="footer-copy">
+          <p>&copy; 2025 NubeTech. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Script para animação de carregamento e inicialização do video -->
+  <script>
+    window.addEventListener("load", function () {
+      document.querySelector(".slide-in").classList.add("loaded");
+      document.getElementById('vid').play();
+    });
+  </script>
+</body>
+</html>

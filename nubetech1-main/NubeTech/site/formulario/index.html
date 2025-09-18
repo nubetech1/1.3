@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastre-se na NubeTech</title>
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color:rgb(41, 40, 40);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: rgba(41, 40, 40, 0);
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgb(41, 40, 40);
+      width: 100%;
+      max-width: 320px;
+    }
+
+    form input[type="text"],
+    form input[type="password"],
+    form input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    form input[type="submit"] {
+      background-color: #222;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    form input[type="submit"]:hover {
+      background-color: #444;
+    }
+
+    @media (max-width: 400px) {
+      form {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <form name="form1" id="form1" method="POST" action="valida.php">
+        Nome:<input type="text" name="nome" id="nome" placeholder="Digite seu nome" required>
+        Senha:<input type="password" name="senha" id="senha" placeholder="Digite sua senha com 8 digitos" required>
+        <input type="submit" name="logar" id="logar" value="Cadastre-se" href="index.html">
+    </form>
+        </main>
+        <section class="images">
+            <img src="nubesemfundo.png" alt="">
+            <div class="circle"></div>
+        </section>
+       
+
+            </div>
+</body>
+</html>

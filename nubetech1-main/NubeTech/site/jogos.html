@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <!-- Definindo o tipo de codificação e meta informações importantes para a página -->
+  <meta charset="UTF-8" /> <!-- Codificação para garantir que os caracteres especiais sejam exibidos corretamente -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Responsividade para adaptar o conteúdo às telas de diferentes tamanhos -->
+  
+  <!-- Link para o arquivo CSS que contém os estilos da página -->
+  <link rel="stylesheet" href="jogos.css" />
+  
+  <!-- Ícone que aparece na aba do navegador (favicon) -->
+  <link rel="shortcut icon" href="logo sem fundo.png" type="image/x-icon" />
+  
+  <title>NubeGames</title> <!-- Título que aparece na aba do navegador -->
+</head>
+
+<body>
+  <!-- Cabeçalho da página com o logo da NubeGames -->
+  <header class="conteiner">
+    <!-- Logo da NubeGames -->
+    <img src="nubegamesemfundo.png" alt="Logo da NubeGames" width="200" height="175" />
+  </header>
+
+  <!-- Corpo principal da página -->
+  <main class="slide-in">
+    <section class="conteiner">
+      <!-- Título principal da página -->
+      <h1>DESCUBRA NUBEGAMES</h1>
+    </section>
+
+    <section class="destaques">
+      <!-- Descrição geral sobre o que a NubeGames oferece -->
+      <h3>Entre no mundo dos jogos e divirta-se com a NubeTech</h3>
+      
+      <h2>DESTAQUE DO ANO</h2>
+
+      <div class="cards-conteiner">
+        <!-- Cada card abaixo representa um jogo oferecido -->
+        
+        <!-- Jogo 1: NubeFlash -->
+        <div class="card">
+          <img src="../../NubeTech/jogo/NubeFlashCapaDeJogo.png" alt="Imagem do jogo NubeFlash" />
+          <h3>NubeFlash</h3>
+          <p><strong>Desafie seus limites clique nas cores para revelar as letras da palavra secreta. Complete todas as palavras para vencer! Até aonde sua capacidade pode chegar?</strong></p>
+          <!-- Link para o jogo NubeFlash -->
+          <a href="../jogo/NubeFlash/index.html">
+            <button class="JOGO">Jogar</button>
+          </a>
+        </div>
+
+        <!-- Jogo 2 -->
+        <div class="card">
+          <img src="../../NubeTech/jogo/DropBunnyCapaDeJogo.png" alt="Imagem ilustrativa do jogo 2" />
+          <h3>DropBunny</h3>
+          <p><strong>PomPom está com fome! Você consegue ajudá-lo a coletar todas as cenouras enquanto desvia de diversos obstáculos?</strong></p>
+          <!-- Link para o jogo 2 -->
+          <a href="../jogo/cai comida/index.html">
+            <button class="JOGO">Jogar</button>
+          </a>
+        </div>
+
+        <!-- Jogo 3 -->
+        <div class="card">
+          <img src="../../NubeTech/jogo/AUltimaSementeCapaDeJogo.png" alt="Imagem ilustrativa do jogo 3" />
+          <h3>A Última Semente</h3>
+          <p><strong>Em um mundo completamente devastado pelo desmatamento e Poluição apenas um jovem com o poder de mudar o rumo de tudo! Você consegue guiar ele nessa jornada 
+            cheia de desafios e conscientização?</strong></p>
+
+          <!-- Link para o jogo 3 -->
+          <a href="../jogo/salve o mundo/index.html">
+            <button class="JOGO">Jogar</button>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carrossel de jogos -->
+    <section class="carousel-section slide-in">
+      <div class="carousel-container">
+        <!-- Botões de navegação do carrossel -->
+        <button class="prev" aria-label="Imagem anterior">&#10094;</button>
+
+        <!-- Itens do carrossel, cada um representando uma imagem do jogo -->
+        <div class="carousel">
+          <div class="carousel-item"><img src="NubeMemória.jpeg" alt="Jogo NubeMemória" /></div>
+          <div class="carousel-item"><img src="NubeValley.png" alt="Jogo NubeValley" /></div>
+          <div class="carousel-item"><img src="../../NubeTech/jogo/NubeFlashBanner.png" alt="Jogo NubeFlash" /></div>
+          <div class="carousel-item"><img src="../../NubeTech/jogo/DropBunnyBanner.png" alt="Jogo 4" /></div>
+          <div class="carousel-item"><img src="../../NubeTech/jogo/AUltimaSementeBanner.png" alt="Jogo 5" /></div>
+        </div>
+
+        <!-- Botão para avançar para a próxima imagem -->
+        <button class="next" aria-label="Próxima imagem">&#10095;</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé com um botão para voltar para a página inicial da NubeTech -->
+  <footer>
+    <a href="index.html">
+      <button class="voltarN" aria-label="Voltar para a NubeTech">Voltar Para a NubeTech</button>
+    </a>
+  </footer>
+
+  <!-- Scripts JavaScript -->
+  <script>
+    // Selecionando os elementos do carrossel e botões de navegação
+    const carousel = document.querySelector('.carousel');
+    const items = document.querySelectorAll('.carousel-item');
+    const prevBtn = document.querySelector('.prev');
+    const nextBtn = document.querySelector('.next');
+
+    let currentIndex = 0;
+    const totalItems = items.length;
+
+    // Função que atualiza a posição do carrossel
+    function updateCarousel() {
+      const offset = -currentIndex * 100;
+      carousel.style.transform = `translateX(${offset}%)`;
+    }
+
+    // Adicionando eventos de clique aos botões do carrossel
+    if (carousel && prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateCarousel();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+      });
+
+      updateCarousel();
+    }
+
+    // Funcionalidade de "slide-in" para as seções da página
+    const slideElements = document.querySelectorAll('.slide-in');
+    
+    const handleSlideIn = () => {
+      slideElements.forEach(el => {
+        if (!el.classList.contains('active')) {
+          const boxTop = el.getBoundingClientRect().top;
+          const triggerPoint = window.innerHeight * 0.9;
+
+          // Verificando quando o elemento entra na tela para adicionar a classe "active"
+          if (boxTop < triggerPoint) {
+            el.classList.add('active');
+          }
+        }
+      });
+    };
+
+    // Chamando a função de slide-in quando o usuário rolar a página ou ao carregar a página
+    window.addEventListener('scroll', handleSlideIn);
+    window.addEventListener('load', handleSlideIn);
+  </script>
+</body>
+</html>
